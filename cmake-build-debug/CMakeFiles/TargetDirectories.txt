@@ -1,0 +1,3 @@
+/Users/akindinov/Desktop/prog/CG/CompGraph/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/akindinov/Desktop/prog/CG/CompGraph/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/akindinov/Desktop/prog/CG/CompGraph/cmake-build-debug/CMakeFiles/main.dir
