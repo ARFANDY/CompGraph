@@ -37,11 +37,6 @@ void Player::ProcessInput(MovementDir dir)
 
 void Player::Draw(Image &screen)
 {
-    Image img("./resources/tex.png");
-    Image door_img("./resources/door.png");
-    Image wall_img("./resources/wall.png");
-    Image fall_img("./resources/fall.png");
-    Image ground_img("./resources/ground.png");
 
 //    for(int y = 0; y <= 1024; ++y)
 //    {
@@ -51,12 +46,6 @@ void Player::Draw(Image &screen)
 //            screen.PutPixel(x, y, checkPixel);
 //        }
 //    }
-
-    for (int y = 0; y <= 16; ++y)
-        for (int x = 0; x <= 16; ++x) {
-            Pixel tmp = ground_img.GetPixel(x, y);
-            screen.PutPixel(400 + x, 400 + y, tmp);
-        }
 
   if(Moved())
   {
