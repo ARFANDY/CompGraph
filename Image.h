@@ -14,6 +14,7 @@ struct Pixel
 };
 
 constexpr Pixel backgroundColor{0, 0, 0, 0};
+constexpr Pixel checkColor{0, 0, 255, 255};
 
 struct Image
 {

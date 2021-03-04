@@ -1,6 +1,7 @@
 #include "common.h"
 #include "Image.h"
 #include "Player.h"
+#include "Levels.h"
 
 #define GLFW_DLL
 #include <GLFW/glfw3.h>
@@ -37,9 +38,9 @@ void OnKeyboardPressed(GLFWwindow* window, int key, int scancode, int action, in
     break;
 	default:
 		if (action == GLFW_PRESS)
-      Input.keys[key] = true;
+            Input.keys[key] = true;
 		else if (action == GLFW_RELEASE)
-      Input.keys[key] = false;
+            Input.keys[key] = false;
 	}
 }
 
@@ -106,10 +107,10 @@ int initGL()
 	std::cout << "Version: " << glGetString(GL_VERSION) << std::endl;
 	std::cout << "GLSL: " << glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
 
-  std::cout << "Controls: "<< std::endl;
-  std::cout << "press right mouse button to capture/release mouse cursor  "<< std::endl;
-  std::cout << "W, A, S, D - movement  "<< std::endl;
-  std::cout << "press ESC to exit" << std::endl;
+    std::cout << "Controls: "<< std::endl;
+    std::cout << "press right mouse button to capture/release mouse cursor  "<< std::endl;
+    std::cout << "W, A, S, D - movement  "<< std::endl;
+    std::cout << "press ESC to exit" << std::endl;
 
 	return 0;
 }
@@ -117,61 +118,60 @@ int initGL()
 int main(int argc, char** argv)
 {
 	if(!glfwInit())
-    return -1;
+        return -1;
 
 //	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 //	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 //	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
-  GLFWwindow*  window = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "task1 base project", nullptr, nullptr);
-	if (window == nullptr)
-	{
-		std::cout << "Failed to create GLFW window" << std::endl;
-		glfwTerminate();
-		return -1;
-	}
+    GLFWwindow*  window = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Game", nullptr, nullptr);
+	    if (window == nullptr)
+	    {
+            std::cout << "Failed to create GLFW window" << std::endl;
+            glfwTerminate();
+            return -1;
+	    }
 	
-	glfwMakeContextCurrent(window); 
+        glfwMakeContextCurrent(window);
 
-	glfwSetKeyCallback        (window, OnKeyboardPressed);  
-	glfwSetCursorPosCallback  (window, OnMouseMove); 
-  glfwSetMouseButtonCallback(window, OnMouseButtonClicked);
-	glfwSetScrollCallback     (window, OnMouseScroll);
+        glfwSetKeyCallback        (window, OnKeyboardPressed);
+        glfwSetCursorPosCallback  (window, OnMouseMove);
+        glfwSetMouseButtonCallback(window, OnMouseButtonClicked);
+        glfwSetScrollCallback     (window, OnMouseScroll);
 
-	if(initGL() != 0) 
-		return -1;
+	    if(initGL() != 0)
+		    return -1;
 	
-  //Reset any OpenGL errors which could be present for some reason
-	GLenum gl_error = glGetError();
-	while (gl_error != GL_NO_ERROR)
-		gl_error = glGetError();
+      //Reset any OpenGL errors which could be present for some reason
+        GLenum gl_error = glGetError();
+        while (gl_error != GL_NO_ERROR)
+            gl_error = glGetError();
 
-	Point starting_pos{.x = WINDOW_WIDTH / 2, .y = WINDOW_HEIGHT / 2};
-	Player player{starting_pos};
+        Point starting_pos{.x = WINDOW_WIDTH / 2, .y = WINDOW_HEIGHT / 2};
+        Player player{starting_pos};
 
-	Image img("../resources/tex.png");
-	Image screenBuffer(WINDOW_WIDTH, WINDOW_HEIGHT, 4);
+        Image screenBuffer(WINDOW_WIDTH, WINDOW_HEIGHT, sizeof(Pixel));
 
-  glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);  GL_CHECK_ERRORS;
-  glClearColor(0.0f, 0.0f, 0.0f, 1.0f); GL_CHECK_ERRORS;
+        glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);  GL_CHECK_ERRORS;
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f); GL_CHECK_ERRORS;
 
-  //game loop
-	while (!glfwWindowShouldClose(window))
-	{
-		GLfloat currentFrame = glfwGetTime();
-		deltaTime = currentFrame - lastFrame;
-		lastFrame = currentFrame;
-    glfwPollEvents();
+        //game loop
+        while (!glfwWindowShouldClose(window))
+        {
+            GLfloat currentFrame = glfwGetTime();
+            deltaTime = currentFrame - lastFrame;
+            lastFrame = currentFrame;
+            glfwPollEvents();
 
-    processPlayerMovement(player);
-    player.Draw(screenBuffer);
+            processPlayerMovement(player);
+            player.Draw(screenBuffer);
 
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); GL_CHECK_ERRORS;
-    glDrawPixels (WINDOW_WIDTH, WINDOW_HEIGHT, GL_RGBA, GL_UNSIGNED_BYTE, screenBuffer.Data()); GL_CHECK_ERRORS;
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); GL_CHECK_ERRORS;
+            glDrawPixels (WINDOW_WIDTH, WINDOW_HEIGHT, GL_RGBA, GL_UNSIGNED_BYTE, screenBuffer.Data()); GL_CHECK_ERRORS;
 
-		glfwSwapBuffers(window);
-	}
+            glfwSwapBuffers(window);
+        }
 
 	glfwTerminate();
 	return 0;
