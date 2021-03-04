@@ -6,11 +6,16 @@
 Level::Level(const std::string &a_path): Double_array() {
     std::ifstream fin(a_path);
 
+    if (!fin)
+        std::cout << "I can't found file!" << std::endl;
+
     number = static_cast<int>(static_cast<unsigned char>(a_path[0]));
     type = a_path[1];
 
-    for (int i = 0; i <= 63; ++i)
+    for (int i = 0; i < 64; ++i)
         fin.getline(Double_array[i], 63, '\n');
+
+    std::cout << "Constructor good" << std::endl;
 
     fin.close();
 }
@@ -24,10 +29,13 @@ void Level::Install(Image &screen) {
     Image person_img("./resources/person.png");
     Image ground_img("./resources/ground.png");
     Image temp_img(0, 0, 4);
+    std::cout << "Begin install" << std::endl;
 
-    int x, y = 1008;
+    std::cout << sizeof(Double_array[0]) << sizeof(Double_array[63]) << std::endl;
+
+    int y = 1008;
     for (int i = 0; i < 64; ++i) {
-        x = 0;
+        int x = 0;
         for (int j = 0; j < 64; ++j) {
 
             switch (Double_array[i][j]) {
@@ -56,8 +64,8 @@ void Level::Install(Image &screen) {
                     break;
             }
 
-            for (int s = 0; s <= 16; ++s)
-                for (int t = 0; t <= 16; ++t) {
+            for (int s = 0; s < 16; ++s)
+                for (int t = 0; t < 16; ++t) {
                     Pixel temp_pixel = temp_img.GetPixel(t, s);
                     screen.PutPixel(x + t, y + s, temp_pixel);
                 }
@@ -66,4 +74,5 @@ void Level::Install(Image &screen) {
         }
         y -= 16;
     }
+    std::cout << "End install" << std::endl;
 }

@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "Levels.h"
 
 
 bool Player::Moved() const
@@ -37,10 +38,11 @@ void Player::ProcessInput(MovementDir dir)
 
 void Player::Draw(Image &screen)
 {
-
-//    for(int y = 0; y <= 1024; ++y)
+    Level level("./resources/1A.txt");
+    level.Install(screen);
+//    for(int y = 1003; y < 1020; ++y)
 //    {
-//        for(int x = 0; x <= 1024; ++x)
+//        for(int x = 10; x < 27; ++x)
 //        {
 //            Pixel checkPixel{uint8_t(x % 255), uint8_t(y % 255), uint8_t(((x + y) / 2) % 255), 255};
 //            screen.PutPixel(x, y, checkPixel);

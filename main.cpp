@@ -150,10 +150,9 @@ int main(int argc, char** argv)
 
         Point starting_pos{.x = WINDOW_WIDTH / 2, .y = WINDOW_HEIGHT / 2};
         Player player{starting_pos};
-        Level level("./resources/1A.txt");
 
         Image screenBuffer(WINDOW_WIDTH, WINDOW_HEIGHT, sizeof(Pixel));
-        level.Install(screenBuffer);
+        std::cout << "Levels good" << std::endl;
 
         glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);  GL_CHECK_ERRORS;
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f); GL_CHECK_ERRORS;
