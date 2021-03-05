@@ -10,11 +10,9 @@ struct Level
     explicit Level(const std::string &a_path);
     void Install(Image &screen);
 
-    char Double_array[64][64];
-
-
 private:
-    char type;
+    char double_array[64][64];
+    int doors[4] = {0, 0, 0, 0};
 
 };
 

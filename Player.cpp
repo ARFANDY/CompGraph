@@ -36,28 +36,10 @@ void Player::ProcessInput(MovementDir dir)
   }
 }
 
-void Player::Draw(Image &screen)
+void Player::Draw(Image &screen, const std::string &a_path)
 {
-    Level level("./resources/A.txt");
+    Level level(a_path);
     level.Install(screen);
-//    for (int s = 0; s < wall_img.Height(); ++s)
-//        for (int t = 0; t < wall_img.Width(); ++t) {
-//            Pixel temp_pixel = wall_img.GetPixel(t, s);
-//            screen.PutPixel(0 + t, 1008 + s, temp_pixel);
-//            screen.PutPixel(16 + t, 1008 + s, temp_pixel);
-//            screen.PutPixel(32 + t, 1008 + s, temp_pixel);
-//            screen.PutPixel(48 + t, 1008 + s, temp_pixel);
-//
-//            screen.PutPixel(0 + t, 992 + s, temp_pixel);
-//            screen.PutPixel(16 + t, 992 + s, temp_pixel);
-//            screen.PutPixel(32 + t, 992 + s, temp_pixel);
-//            screen.PutPixel(48 + t, 992 + s, temp_pixel);
-//
-//            screen.PutPixel(64 + t, 1008 + s, temp_pixel);
-//            screen.PutPixel(80 + t, 1008 + s, temp_pixel);
-//            screen.PutPixel(96 + t, 1008 + s, temp_pixel);
-//            screen.PutPixel(112 + t, 1008 + s, temp_pixel);
-//        }
 
   if(Moved())
   {

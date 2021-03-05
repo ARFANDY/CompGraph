@@ -3,7 +3,7 @@
 #include <fstream>
 
 
-Level::Level(const std::string &a_path): Double_array() {
+Level::Level(const std::string &a_path): double_array() {
     std::ifstream fin(a_path);
 
     if (!fin.is_open())
@@ -11,10 +11,46 @@ Level::Level(const std::string &a_path): Double_array() {
 
     int i = 0;
     while (!fin.eof()) {
-        fin.getline(Double_array[i], 100);
+        fin.getline(double_array[i], 100);
         ++i;
     }
     fin.close();
+
+    switch (a_path[a_path.length() - 5]) {
+        case 'A':
+            doors[1] = doors[2] = 1;
+            break;
+        case 'B':
+            doors[1] = doors[2] = doors[3] = 1;
+            break;
+        case 'C':
+            doors[2] = doors[3] = 1;
+            break;
+        case 'F':
+            doors[1] = doors[2] = 1;
+            break;
+        case 'H':
+            doors[0] = doors[1] = doors[2] = doors[3] = 1;
+            break;
+        case 'V':
+            doors[0] = doors[2] = doors[3] = 1;
+            break;
+        case 'Q':
+            doors[0] = doors[2] = doors[3] = 1;
+            doors[1] = 2;
+            break;
+        case 'K':
+            doors[0] = doors[1] = 1;
+            break;
+        case 'T':
+            doors[0] = doors[1] = doors[3] = 1;
+            break;
+        case 'J':
+            doors[0] = doors[3] = 1;
+            break;
+        default:
+            std::cout << "Incorrect file name!" << std::endl;
+    }
 }
 
 void Level::Install(Image &screen) {
@@ -34,7 +70,7 @@ void Level::Install(Image &screen) {
             for (int s = 0; s < 16; ++s)
                 for (int t = 0; t < 16; ++t) {
                     Pixel temp_pixel{0 ,0, 0, 0};
-                    switch (Double_array[i][j]) {
+                    switch (double_array[i][j]) {
                         case '#': {
                             temp_pixel = wall_img.GetPixel(t, s);
                             break;

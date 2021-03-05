@@ -25,7 +25,7 @@ struct Player
 
   bool Moved() const;
   void ProcessInput(MovementDir dir);
-  void Draw(Image &screen);
+  void Draw(Image &screen, const std::string &a_path);
 
 private:
   Point coords {.x = 10, .y = 10};

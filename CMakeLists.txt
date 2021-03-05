@@ -12,6 +12,7 @@ set(SOURCE_FILES
         Image.cpp
         Player.cpp
         Levels.cpp
+        Map.cpp
         main.cpp)
 
 set(ADDITIONAL_INCLUDE_DIRS
