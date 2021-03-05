@@ -38,10 +38,8 @@ void Player::ProcessInput(MovementDir dir)
 
 void Player::Draw(Image &screen)
 {
-    Level level("./resources/1A.txt");
+    Level level("./resources/A.txt");
     level.Install(screen);
-    Image wall_img("./resources/wall.png");
-
 //    for (int s = 0; s < wall_img.Height(); ++s)
 //        for (int t = 0; t < wall_img.Width(); ++t) {
 //            Pixel temp_pixel = wall_img.GetPixel(t, s);

@@ -14,7 +14,6 @@ struct Level
 
 
 private:
-    int number;
     char type;
 
 };

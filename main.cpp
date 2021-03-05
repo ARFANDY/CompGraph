@@ -46,14 +46,18 @@ void OnKeyboardPressed(GLFWwindow* window, int key, int scancode, int action, in
 
 void processPlayerMovement(Player &player)
 {
-  if (Input.keys[GLFW_KEY_W])
-    player.ProcessInput(MovementDir::UP);
-  else if (Input.keys[GLFW_KEY_S])
-    player.ProcessInput(MovementDir::DOWN);
-  if (Input.keys[GLFW_KEY_A])
-    player.ProcessInput(MovementDir::LEFT);
-  else if (Input.keys[GLFW_KEY_D])
-    player.ProcessInput(MovementDir::RIGHT);
+    if (Input.keys[GLFW_KEY_E])
+        player.ProcessInput(MovementDir::ENTER_ROOM);
+    else {
+        if (Input.keys[GLFW_KEY_W])
+            player.ProcessInput(MovementDir::UP);
+        else if (Input.keys[GLFW_KEY_S])
+            player.ProcessInput(MovementDir::DOWN);
+        if (Input.keys[GLFW_KEY_A])
+            player.ProcessInput(MovementDir::LEFT);
+        else if (Input.keys[GLFW_KEY_D])
+            player.ProcessInput(MovementDir::RIGHT);
+    }
 }
 
 void OnMouseButtonClicked(GLFWwindow* window, int button, int action, int mods)
@@ -124,8 +128,8 @@ int main(int argc, char** argv)
 //	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 //	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
-
-    GLFWwindow*  window = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Game", nullptr, nullptr);
+//TODO: вернуть WINDOW_WIDTH WINDOW_HEIGHT
+    GLFWwindow*  window = glfwCreateWindow(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, "Game", nullptr, nullptr);
 	    if (window == nullptr)
 	    {
             std::cout << "Failed to create GLFW window" << std::endl;
@@ -152,7 +156,6 @@ int main(int argc, char** argv)
         Player player{starting_pos};
 
         Image screenBuffer(WINDOW_WIDTH, WINDOW_HEIGHT, sizeof(Pixel));
-        //std::cout << "Levels good" << std::endl;
 
         glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);  GL_CHECK_ERRORS;
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f); GL_CHECK_ERRORS;

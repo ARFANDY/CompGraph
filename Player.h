@@ -14,7 +14,8 @@ enum class MovementDir
   UP,
   DOWN,
   LEFT,
-  RIGHT
+  RIGHT,
+  ENTER_ROOM
 };
 
 struct Player
