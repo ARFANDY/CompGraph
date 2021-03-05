@@ -40,14 +40,26 @@ void Player::Draw(Image &screen)
 {
     Level level("./resources/1A.txt");
     level.Install(screen);
-//    for(int y = 1003; y < 1020; ++y)
-//    {
-//        for(int x = 10; x < 27; ++x)
-//        {
-//            Pixel checkPixel{uint8_t(x % 255), uint8_t(y % 255), uint8_t(((x + y) / 2) % 255), 255};
-//            screen.PutPixel(x, y, checkPixel);
+    Image wall_img("./resources/wall.png");
+
+//    for (int s = 0; s < wall_img.Height(); ++s)
+//        for (int t = 0; t < wall_img.Width(); ++t) {
+//            Pixel temp_pixel = wall_img.GetPixel(t, s);
+//            screen.PutPixel(0 + t, 1008 + s, temp_pixel);
+//            screen.PutPixel(16 + t, 1008 + s, temp_pixel);
+//            screen.PutPixel(32 + t, 1008 + s, temp_pixel);
+//            screen.PutPixel(48 + t, 1008 + s, temp_pixel);
+//
+//            screen.PutPixel(0 + t, 992 + s, temp_pixel);
+//            screen.PutPixel(16 + t, 992 + s, temp_pixel);
+//            screen.PutPixel(32 + t, 992 + s, temp_pixel);
+//            screen.PutPixel(48 + t, 992 + s, temp_pixel);
+//
+//            screen.PutPixel(64 + t, 1008 + s, temp_pixel);
+//            screen.PutPixel(80 + t, 1008 + s, temp_pixel);
+//            screen.PutPixel(96 + t, 1008 + s, temp_pixel);
+//            screen.PutPixel(112 + t, 1008 + s, temp_pixel);
 //        }
-//    }
 
   if(Moved())
   {

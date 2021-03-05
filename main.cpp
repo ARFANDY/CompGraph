@@ -152,7 +152,7 @@ int main(int argc, char** argv)
         Player player{starting_pos};
 
         Image screenBuffer(WINDOW_WIDTH, WINDOW_HEIGHT, sizeof(Pixel));
-        std::cout << "Levels good" << std::endl;
+        //std::cout << "Levels good" << std::endl;
 
         glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);  GL_CHECK_ERRORS;
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f); GL_CHECK_ERRORS;

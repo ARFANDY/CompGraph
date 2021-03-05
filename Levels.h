@@ -3,13 +3,11 @@
 
 
 #include "Player.h"
-#include <vector>
 
 
 struct Level
 {
     explicit Level(const std::string &a_path);
-
     void Install(Image &screen);
 
     char Double_array[64][64];

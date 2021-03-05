@@ -34,9 +34,9 @@ struct Image
   ~Image();
 
 private:
-  int width = -1;
-  int height = -1;
-  int channels = 3;
+  int width = 16;
+  int height = 16;
+  int channels = 4;
   size_t size = 0;
   Pixel *data = nullptr;
   bool self_allocated = false;
