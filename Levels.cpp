@@ -289,8 +289,3 @@ void Level::Install(Image &screen) {
         y -= 16;
     }
 }
-
-void Level::Make_doors_coord() {
-
-
-}

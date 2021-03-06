@@ -9,12 +9,12 @@ public:
     explicit Engine(Image &screen, Level &level, const std::string &map_path);
     std::string Curr_level_str();
     void Install_level(int coord_level_x, int coord_level_y);
-    int curr_level[2];
+    int curr_level[2]; //[строка, столбец]
+    char map_array[4][5];
+    Level& level_link;
 
 private:
-    char map_array[4][5];
     Image& curr_screen;
-    Level& level_link;
 
 };
 

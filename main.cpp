@@ -1,8 +1,5 @@
 #include "common.h"
-#include "Image.h"
 #include "Player.h"
-#include "Levels.h"
-#include "Engine.h"
 
 #define GLFW_DLL
 #include <GLFW/glfw3.h>
@@ -161,8 +158,9 @@ int main(int argc, char** argv)
         glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);  GL_CHECK_ERRORS;
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f); GL_CHECK_ERRORS;
 
-        Engine engine(screenBuffer, "./resources/map.txt");
-        std::cout << engine.Curr_level_str() << std::endl;
+        Level level("./resources/A.txt");
+        Engine engine(screenBuffer, level, "./resources/map.txt");
+
         std::cout << "Engine is good" << std::endl;
         //game loop
         while (!glfwWindowShouldClose(window))
@@ -173,7 +171,7 @@ int main(int argc, char** argv)
             glfwPollEvents();
 
             processPlayerMovement(player);
-            player.Draw(screenBuffer);
+            player.Draw(screenBuffer, engine);
 
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); GL_CHECK_ERRORS;
             glDrawPixels (WINDOW_WIDTH, WINDOW_HEIGHT, GL_RGBA, GL_UNSIGNED_BYTE, screenBuffer.Data()); GL_CHECK_ERRORS;

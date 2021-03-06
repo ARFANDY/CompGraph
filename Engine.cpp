@@ -24,8 +24,8 @@ std::string Engine::Curr_level_str() {
     return temp;
 }
 
-void Engine::Install_level(int coord_level_x, int coord_level_y) {
-    curr_level[0] = coord_level_x; curr_level[1] = coord_level_y;
+void Engine::Install_level(int coord_level_y, int coord_level_x) {
+    curr_level[0] = coord_level_y; curr_level[1] = coord_level_x;
 
     Level tmp(Curr_level_str());
     level_link = tmp;

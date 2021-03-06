@@ -1,5 +1,4 @@
 #include "Player.h"
-#include <unistd.h>
 
 
 bool Player::Moved() const
@@ -43,16 +42,28 @@ void Player::ProcessInput(MovementDir dir)
   }
 }
 
-void Player::Draw(Image &screen)
+void Player::Draw(Image &screen, Engine &engine)
 {
-    Level level("./resources/A.txt");
-    sleep(2000);
-    Engine engine(screen, level, "./resources/map.txt");
-
-
     if (flag) {
-
-        //engine.curr_level;
+        Level tmp = engine.level_link;
+        for (int i = 0; i < 4; ++i) {
+            if ((tmp.doors_direction[i] != 0) && (coords.x - tmp.doors_coord[i][1] < 20) && (coords.y - tmp.doors_coord[i][0] < 20)) {
+                switch (i) {
+                    case 0:
+                        engine.Install_level(engine.curr_level[0] - 1 , engine.curr_level[1]);
+                        break;
+                    case 1:
+                        engine.Install_level(engine.curr_level[0] , engine.curr_level[1] + 1);
+                        break;
+                    case 2:
+                        engine.Install_level(engine.curr_level[0] + 1 , engine.curr_level[1]);
+                        break;
+                    case 3:
+                        engine.Install_level(engine.curr_level[0] , engine.curr_level[1] - 1);
+                        break;
+                }
+            }
+        }
     }
 
     if (Moved()) {
