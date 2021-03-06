@@ -3,7 +3,7 @@
 #include <fstream>
 
 
-Engine::Engine(Image &screen, const std::string &map_path): map_array(), curr_level(), curr_screen(screen) {
+Engine::Engine(Image &screen, Level &level, const std::string &map_path): map_array(), curr_level(), curr_screen(screen), level_link(level) {
     std::ifstream file_map(map_path);
     if (!file_map.is_open())
         std::cout << "I can't found map file!" << std::endl;
@@ -15,7 +15,7 @@ Engine::Engine(Image &screen, const std::string &map_path): map_array(), curr_le
     }
     file_map.close();
 
-    curr_level[0] = 0; curr_level[1] = 0; // init level A
+    this->Install_level(0, 0);
 }
 
 std::string Engine::Curr_level_str() {
@@ -24,7 +24,11 @@ std::string Engine::Curr_level_str() {
     return temp;
 }
 
-void Engine::Install_level() {
-    Level level(Curr_level_str());
-    level.Install(curr_screen);
+void Engine::Install_level(int coord_level_x, int coord_level_y) {
+    curr_level[0] = coord_level_x; curr_level[1] = coord_level_y;
+
+    Level tmp(Curr_level_str());
+    level_link = tmp;
+
+    level_link.Install(curr_screen);
 }

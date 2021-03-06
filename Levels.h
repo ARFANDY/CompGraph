@@ -10,11 +10,12 @@ struct Level
     void Install(Image &screen);
     void Make_doors_coord();
 
-private:
-    char double_array[64][64];
     int doors_coord[4][2] = {{-1, -1}, {-1, -1}, {-1, -1}, {-1, -1}};
     int doors_direction[4] = {0, 0, 0, 0};
     char type;
+
+private:
+    char double_array[64][64];
 
 };
 

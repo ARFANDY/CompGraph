@@ -30,7 +30,7 @@ Level::Level(const std::string &a_path): double_array(), doors_coord(), doors_di
             for (int j = 0; j < 64; ++j) { //2
                 if (double_array[63][j] == 'x') {
                     doors_coord[2][0] = j * 16;
-                    doors_coord[2][1] = 1008;
+                    doors_coord[2][1] = 16;
                 }
             }
             break;

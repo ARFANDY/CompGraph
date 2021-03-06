@@ -1,4 +1,5 @@
 #include "Player.h"
+#include <unistd.h>
 
 
 bool Player::Moved() const
@@ -44,13 +45,15 @@ void Player::ProcessInput(MovementDir dir)
 
 void Player::Draw(Image &screen)
 {
-    Engine engine(screen, "./resources/map.txt");
+    Level level("./resources/A.txt");
+    sleep(2000);
+    Engine engine(screen, level, "./resources/map.txt");
+
+
     if (flag) {
 
         //engine.curr_level;
     }
-
-    engine.Install_level();
 
     if (Moved()) {
         for (int y = old_coords.y; y <= old_coords.y + tileSize; ++y) {
