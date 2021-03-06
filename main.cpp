@@ -27,21 +27,21 @@ void OnKeyboardPressed(GLFWwindow* window, int key, int scancode, int action, in
 {
 	switch (key)
 	{
-	case GLFW_KEY_ESCAPE:
-		if (action == GLFW_PRESS)
-			glfwSetWindowShouldClose(window, GL_TRUE);
-		break;
-  case GLFW_KEY_1:
-    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
-    break;
-  case GLFW_KEY_2:
-    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-    break;
-	default:
-		if (action == GLFW_PRESS)
-            Input.keys[key] = true;
-		else if (action == GLFW_RELEASE)
-            Input.keys[key] = false;
+	    case GLFW_KEY_ESCAPE:
+		    if (action == GLFW_PRESS)
+			    glfwSetWindowShouldClose(window, GL_TRUE);
+		    break;
+		case GLFW_KEY_1:
+            glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+            break;
+        case GLFW_KEY_2:
+            glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+            break;
+        default:
+            if (action == GLFW_PRESS)
+                Input.keys[key] = true;
+            else if (action == GLFW_RELEASE)
+                Input.keys[key] = false;
 	}
 }
 

@@ -3,52 +3,231 @@
 #include <fstream>
 
 
-Level::Level(const std::string &a_path): double_array() {
+Level::Level(const std::string &a_path): double_array(), doors_coord(), doors_direction() {
     std::ifstream fin(a_path);
 
     if (!fin.is_open())
         std::cout << "I can't found file!" << std::endl;
 
-    int i = 0;
+    int k = 0;
     while (!fin.eof()) {
-        fin.getline(double_array[i], 100);
-        ++i;
+        fin.getline(double_array[k], 100);
+        ++k;
     }
     fin.close();
 
-    //std::cout << double_array[63] << std::endl;
-
     switch (a_path[a_path.length() - 5]) {
         case 'A':
-            doors[1] = doors[2] = 1;
+            doors_direction[1] = doors_direction[2] = 1;
+            type = 'A';
+
+            for (int i = 0; i < 64; ++i) { //1
+                if (double_array[i][63] == 'x') {
+                    doors_coord[1][0] = 1008;
+                    doors_coord[1][1] = (1024 - i * 16);
+                }
+            }
+            for (int j = 0; j < 64; ++j) { //2
+                if (double_array[63][j] == 'x') {
+                    doors_coord[2][0] = j * 16;
+                    doors_coord[2][1] = 1008;
+                }
+            }
             break;
         case 'B':
-            doors[1] = doors[2] = doors[3] = 1;
+            doors_direction[1] = doors_direction[2] = doors_direction[3] = 1;
+            type = 'B';
+
+            for (int i = 0; i < 64; ++i) { //1
+                if (double_array[i][63] == 'x') {
+                    doors_coord[1][0] = 1008;
+                    doors_coord[1][1] = (1024 - i * 16);
+                }
+            }
+            for (int j = 0; j < 64; ++j) { //2
+                if (double_array[63][j] == 'x') {
+                    doors_coord[2][0] = j * 16;
+                    doors_coord[2][1] = 16;
+                }
+            }
+            for (int i = 0; i < 64; ++i) { //3
+                if (double_array[i][0] == 'x') {
+                    doors_coord[3][0] = 16;
+                    doors_coord[3][1] = (1024 - i * 16);
+                }
+            }
             break;
         case 'C':
-            doors[2] = doors[3] = 1;
+            doors_direction[2] = doors_direction[3] = 1;
+            type = 'C';
+
+            for (int j = 0; j < 64; ++j) { //2
+                if (double_array[63][j] == 'x') {
+                    doors_coord[2][0] = j * 16;
+                    doors_coord[2][1] = 16;
+                }
+            }
+            for (int i = 0; i < 64; ++i) { //3
+                if (double_array[i][0] == 'x') {
+                    doors_coord[3][0] = 16;
+                    doors_coord[3][1] = (1024 - i * 16);
+                }
+            }
             break;
         case 'F':
-            doors[1] = doors[2] = 1;
+            doors_direction[0] = doors_direction[1] = doors_direction[2] = 1;
+            type = 'F';
+
+            for (int j = 0; j < 64; ++j) { //0
+                if (double_array[0][j] == 'x') {
+                    doors_coord[0][0] = j * 16;
+                    doors_coord[0][1] = 1008;
+                }
+            }
+            for (int i = 0; i < 64; ++i) { //1
+                if (double_array[i][63] == 'x') {
+                    doors_coord[1][0] = 1008;
+                    doors_coord[1][1] = (1024 - i * 16);
+                }
+            }
+            for (int j = 0; j < 64; ++j) { //2
+                if (double_array[63][j] == 'x') {
+                    doors_coord[2][0] = j * 16;
+                    doors_coord[2][1] = 16;
+                }
+            }
             break;
         case 'H':
-            doors[0] = doors[1] = doors[2] = doors[3] = 1;
+            doors_direction[0] = doors_direction[1] = doors_direction[2] = doors_direction[3] = 1;
+            type = 'H';
+
+            for (int j = 0; j < 64; ++j) { //0
+                if (double_array[0][j] == 'x') {
+                    doors_coord[0][0] = j * 16;
+                    doors_coord[0][1] = 1008;
+                }
+            }
+            for (int i = 0; i < 64; ++i) { //1
+                if (double_array[i][63] == 'x') {
+                    doors_coord[1][0] = 1008;
+                    doors_coord[1][1] = (1024 - i * 16);
+                }
+            }
+            for (int j = 0; j < 64; ++j) { //2
+                if (double_array[63][j] == 'x') {
+                    doors_coord[2][0] = j * 16;
+                    doors_coord[2][1] = 16;
+                }
+            }
+            for (int i = 0; i < 64; ++i) { //3
+                if (double_array[i][0] == 'x') {
+                    doors_coord[3][0] = 16;
+                    doors_coord[3][1] = (1024 - i * 16);
+                }
+            }
             break;
         case 'V':
-            doors[0] = doors[2] = doors[3] = 1;
+            doors_direction[0] = doors_direction[2] = doors_direction[3] = 1;
+            type = 'V';
+
+            for (int j = 0; j < 64; ++j) { //0
+                if (double_array[0][j] == 'x') {
+                    doors_coord[0][0] = j * 16;
+                    doors_coord[0][1] = 1008;
+                }
+            }
+            for (int j = 0; j < 64; ++j) { //2
+                if (double_array[63][j] == 'x') {
+                    doors_coord[2][0] = j * 16;
+                    doors_coord[2][1] = 16;
+                }
+            }
+            for (int i = 0; i < 64; ++i) { //3
+                if (double_array[i][0] == 'x') {
+                    doors_coord[3][0] = 16;
+                    doors_coord[3][1] = (1024 - i * 16);
+                }
+            }
             break;
         case 'Q':
-            doors[0] = doors[2] = doors[3] = 1;
-            doors[1] = 2;
+            doors_direction[0] = doors_direction[2] = doors_direction[3] = 1;
+            type = 'Q';
+
+            for (int j = 0; j < 64; ++j) { //0
+                if (double_array[0][j] == 'x') {
+                    doors_coord[0][0] = j * 16;
+                    doors_coord[0][1] = 1008;
+                }
+            }
+            for (int j = 0; j < 64; ++j) { //2
+                if (double_array[63][j] == 'x') {
+                    doors_coord[2][0] = j * 16;
+                    doors_coord[2][1] = 16;
+                }
+            }
+            for (int i = 0; i < 64; ++i) { //3
+                if (double_array[i][0] == 'x') {
+                    doors_coord[3][0] = 16;
+                    doors_coord[3][1] = (1024 - i * 16);
+                }
+            }
             break;
         case 'K':
-            doors[0] = doors[1] = 1;
+            doors_direction[0] = doors_direction[1] = 1;
+            type = 'K';
+
+            for (int j = 0; j < 64; ++j) { //0
+                if (double_array[0][j] == 'x') {
+                    doors_coord[0][0] = j * 16;
+                    doors_coord[0][1] = 1008;
+                }
+            }
+            for (int i = 0; i < 64; ++i) { //1
+                if (double_array[i][63] == 'x') {
+                    doors_coord[1][0] = 1008;
+                    doors_coord[1][1] = (1024 - i * 16);
+                }
+            }
             break;
         case 'T':
-            doors[0] = doors[1] = doors[3] = 1;
+            doors_direction[0] = doors_direction[1] = doors_direction[3] = 1;
+            type = 'T';
+
+            for (int j = 0; j < 64; ++j) { //0
+                if (double_array[0][j] == 'x') {
+                    doors_coord[0][0] = j * 16;
+                    doors_coord[0][1] = 1008;
+                }
+            }
+            for (int i = 0; i < 64; ++i) { //1
+                if (double_array[i][63] == 'x') {
+                    doors_coord[1][0] = 1008;
+                    doors_coord[1][1] = (1024 - i * 16);
+                }
+            }
+            for (int i = 0; i < 64; ++i) { //3
+                if (double_array[i][0] == 'x') {
+                    doors_coord[3][0] = 16;
+                    doors_coord[3][1] = (1024 - i * 16);
+                }
+            }
             break;
         case 'J':
-            doors[0] = doors[3] = 1;
+            doors_direction[0] = doors_direction[3] = 1;
+            type = 'J';
+
+            for (int j = 0; j < 64; ++j) { //0
+                if (double_array[0][j] == 'x') {
+                    doors_coord[0][0] = j * 16;
+                    doors_coord[0][1] = 1008;
+                }
+            }
+            for (int i = 0; i < 64; ++i) { //3
+                if (double_array[i][0] == 'x') {
+                    doors_coord[3][0] = 16;
+                    doors_coord[3][1] = (1024 - i * 16);
+                }
+            }
             break;
         default:
             std::cout << "Incorrect file name!" << std::endl;
@@ -109,4 +288,9 @@ void Level::Install(Image &screen) {
         }
         y -= 16;
     }
+}
+
+void Level::Make_doors_coord() {
+
+
 }
