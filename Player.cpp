@@ -1,5 +1,4 @@
 #include "Player.h"
-#include "Levels.h"
 
 
 bool Player::Moved() const
@@ -36,11 +35,10 @@ void Player::ProcessInput(MovementDir dir)
   }
 }
 
-void Player::Draw(Image &screen, const std::string &a_path)
+void Player::Draw(Image &screen)
 {
-    Level level(a_path);
-    level.Install(screen);
-
+    Engine engine(screen, "./resources/map.txt");
+    engine.Install_level();
   if(Moved())
   {
     for(int y = old_coords.y; y <= old_coords.y + tileSize; ++y)

@@ -2,6 +2,8 @@
 #define MAIN_PLAYER_H
 
 #include "Image.h"
+#include "Engine.h"
+#include "Levels.h"
 
 struct Point
 {
@@ -25,7 +27,7 @@ struct Player
 
   bool Moved() const;
   void ProcessInput(MovementDir dir);
-  void Draw(Image &screen, const std::string &a_path);
+  void Draw(Image &screen);
 
 private:
   Point coords {.x = 10, .y = 10};
