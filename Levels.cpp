@@ -16,6 +16,8 @@ Level::Level(const std::string &a_path): double_array() {
     }
     fin.close();
 
+    //std::cout << double_array[63] << std::endl;
+
     switch (a_path[a_path.length() - 5]) {
         case 'A':
             doors[1] = doors[2] = 1;
