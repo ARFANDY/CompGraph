@@ -19,8 +19,8 @@ Engine::Engine(const std::string &map_path): map_array(), currently_level(), cur
 }
 
 std::string Engine::Currently_level_str() {
-    std::string temp = "X.txt";
-    temp[0] = map_array[currently_level[0]][currently_level[1]];
+    std::string temp = "./resources/X.txt";
+    temp[12] = map_array[currently_level[0]][currently_level[1]];
     currently_level_str = temp;
     return currently_level_str;
 }
